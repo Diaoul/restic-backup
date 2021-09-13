@@ -1,0 +1,22 @@
+[Unit]
+Description=Restic backup
+Documentation=man:restic(1)
+Documentation=https://restic.readthedocs.io/en/stable/
+Requires=local-fs.target
+Requires=network-online.target
+
+[Service]
+Type=oneshot
+Environment="RESTIC_CACHE_DIR=/var/cache/restic"
+EnvironmentFile=/etc/restic/restic.conf
+ExecStart=restic backup \
+    --verbose \
+    --one-file-system \
+    --tag systemd \
+    --exclude-caches \
+    --exclude-file /etc/restic/excludes \
+    /etc \
+    /home \
+    /root \
+    /usr/local \
+    /var

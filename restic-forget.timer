@@ -1,0 +1,8 @@
+[Unit]
+Description=Activate restic backup clean up
+
+[Timer]
+OnCalendar=Tue 06:00:00
+
+[Install]
+WantedBy=timers.target

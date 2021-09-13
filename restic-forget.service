@@ -1,0 +1,20 @@
+[Unit]
+Description=Restic backup clean up
+Documentation=man:restic(1)
+Documentation=https://restic.readthedocs.io/en/stable/
+Requires=local-fs.target
+Requires=network-online.target
+
+[Service]
+Type=oneshot
+Environment="RESTIC_CACHE_DIR=/var/cache/restic"
+EnvironmentFile=/etc/restic/restic.conf
+ExecStart=restic forget \
+    --verbose \
+    --prune \
+    --tag systemd \
+    --keep-daily 7 \
+    --keep-weekly 4 \
+    --keep-monthly 6 \
+    --group-by paths
+ExecStartPost=restic check

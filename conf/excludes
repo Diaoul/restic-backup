@@ -1,0 +1,13 @@
+# root directories
+/var/cache
+/var/lock
+/var/log
+/var/opt
+/var/run
+/var/spool
+/var/tmp
+
+# home directories
+/home/*/.cache
+/home/*/.local/share/Trash
+/root/.cache
