@@ -36,6 +36,27 @@ frequency.
 Edit the services in `/etc/systemd/system/restic-*.service` to change restic
 arguments or clean up policy.
 
+## Security
+If your system is secure, you should also protect your backups. The sensitive
+files installed by `make install-conf` are owned by root with mode 600.
+
+## Usage
+Enable and start the timers
+```bash
+sudo systemctl enable --now restic-backup.timer
+sudo systemctl enable --now restic-forget.timer
+```
+
+Verify the status, e.g.
+```bash
+sudo systemctl list-timers
+sudo systemctl status restic-backup.service
+```
+
+For ease of use I created a [wrapper](https://github.com/Diaoul/dotfiles/blob/main/.local/bin/restic-wrapper.sh)
+script that will load the configuration before calling restic.
+Then I just call `sudo restic-wrapper.sh check`.
+
 ## Thanks
 I used inspiration from all over internet, so thank you internet! :handshake:
 
