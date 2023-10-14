@@ -3,7 +3,8 @@ Description=Restic backup clean up
 Documentation=man:restic(1)
 Documentation=https://restic.readthedocs.io/en/stable/
 Requires=local-fs.target
-Requires=network-online.target
+Wants=network-online.target
+After=network-online.target
 
 [Service]
 Type=oneshot
